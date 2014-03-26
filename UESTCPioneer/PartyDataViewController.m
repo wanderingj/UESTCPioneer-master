@@ -9,12 +9,14 @@
 #import "PartyDataViewController.h"
 #import "LeveyTabBarController.h"
 #import "helper.h"
-#import "GuideTableViewController.h"
+#import "TheoryTableViewController.h"
 #import "PersonalViewController.h"
 #import "OrganTableViewController.h"
+#import "GuideTableViewController.h"
+#import "LearnTableViewController.h"
 @interface PartyDataViewController ()
 @property (nonatomic,strong) NSDictionary * dic;
-@property (nonatomic,strong) NSMutableArray * views;
+//@property (nonatomic,strong) NSMutableArray * views;
 @property (nonatomic,strong) NSArray * controllers;
 @end
 
@@ -33,8 +35,10 @@
         NSArray * arr = @[@"中央精神",@"党的知识",@"党的理论",@"党校学习",@"入党流程",@"组织架构",@"办事指南",@"Q&A",@"专业学习"];
         for (int i = 0; i < 3; i ++) {
             for (int j = 0;  j < 3; j++) {
-                UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(j*100+10, i*110+10, 100, 110)];
-                UIImage * image = [helper getCustomImage:[UIImage imageNamed:self.dic[arr[i*3+j]]] insets:UIEdgeInsetsMake(20, 30, 60, 60)];
+                UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(j*100+15, i*110+15, 90, 100)];
+                [btn.layer setBorderWidth:1.0f];
+                [btn.layer setBorderColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8].CGColor];
+                UIImage * image = [helper getCustomImage:[UIImage imageNamed:self.dic[arr[i*3+j]]] insets:UIEdgeInsetsMake(20, 30, 63, 60)];
                 [btn setBackgroundImage:image forState:UIControlStateNormal];
                 [btn setBackgroundColor:[UIColor whiteColor]];
                 [btn setTitleEdgeInsets:UIEdgeInsetsMake(60, 20, 0, 20)];
@@ -51,13 +55,13 @@
 
 - (NSArray *) controllers{
     if (!_controllers) {
-        _controllers = @[[[GuideTableViewController alloc] init],[[GuideTableViewController alloc] init],[[GuideTableViewController alloc] init],[[GuideTableViewController alloc] init],[[GuideTableViewController alloc] init],[[OrganTableViewController alloc] initWithStyle:UITableViewStyleGrouped]];
+        _controllers = @[[[TheoryTableViewController alloc] init],[[TheoryTableViewController alloc] init],[[TheoryTableViewController alloc] init],[[LearnTableViewController alloc] initWithStyle:UITableViewStyleGrouped],[[OrganTableViewController alloc] init],[[OrganTableViewController alloc] initWithStyle:UITableViewStyleGrouped],[[GuideTableViewController alloc]initWithStyle:UITableViewStyleGrouped]];
     }
     return _controllers;
 }
 
 
--(NSMutableArray *)views{
+/*-(NSMutableArray *)views{
     if (!_views) {
         _views = [[NSMutableArray alloc] init];
         for (int i = 1; i < 3;  i ++) {
@@ -74,6 +78,7 @@
     }
     return _views;
 }
+ */
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -96,9 +101,10 @@
         [self.view addSubview:btn];
     }
     
-    for (UIView * view in self.views) {
+/*    for (UIView * view in self.views) {
         [self.view addSubview:view];
     }
+ */
 	// Do any additional setup after loading the view.
 }
 

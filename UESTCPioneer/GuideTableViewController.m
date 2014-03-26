@@ -2,12 +2,12 @@
 //  GuideTableViewController.m
 //  UESTCPioneer
 //
-//  Created by 马君 on 14-3-19.
+//  Created by 马君 on 14-3-22.
 //  Copyright (c) 2014年 Sway. All rights reserved.
 //
 
 #import "GuideTableViewController.h"
-#import "Cells.h"
+#import "GuideDetailViewController.h"
 
 @interface GuideTableViewController ()
 
@@ -17,34 +17,33 @@
 
 @implementation GuideTableViewController
 
-static NSString *CellTableIdentifier = @"CellTableIdentifier";
 
--(NSArray *) data{
-    if (!_data) {
-        _data = @[@{@"title":@"1",@"content":@"111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",@"time":@"2014-3-19"},@{@"title":@"2",@"content":@"222222222222222222222222222222222222222222222222222222222222",@"time":@"2014-3-19"}];
-    }
-    return _data;
-}
+static  NSString *CellTableIdentifier = @"CellTableIdentifier";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
-        self.navigationItem.title = @"中央精神";
+        // Custom initialization
     }
     return self;
 }
 
 
+-(NSArray *)data{
+    if (!_data) {
+        _data = @[@{@"title":@"111",@"time":@"2014-03-22"},@{@"title":@"申请22",@"time":@"2014-03-22"},@{@"title":@"333",@"time":@"2014-03-22"}];
+    }
+    return _data;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320,500) style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellTableIdentifier];
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    [self.view addSubview:self.tableView];
-
+    self.title = @"办事指南";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -60,6 +59,11 @@ static NSString *CellTableIdentifier = @"CellTableIdentifier";
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -70,30 +74,82 @@ static NSString *CellTableIdentifier = @"CellTableIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    Cells *cell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
-    if(cell == nil){
-        cell = [[Cells alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier];
     }
     NSDictionary * rowData = self.data[indexPath.row];
-    cell.titleValue.text = rowData[@"title"];
-    cell.contentValue.text = rowData[@"content"];
-    cell.contentValue.frame = CGRectMake(10, 25, 300, [cell.contentValue.text length]/30*20);
-    cell.timeValue.frame = CGRectMake(220,cell.contentValue.frame.origin.y+cell.contentValue.frame.size.height, 80, 20);
-    cell.timeValue.text = rowData[@"time"];
+    cell.textLabel.text = rowData[@"title"];
+    cell.textLabel.frame = CGRectMake(0, 0, 200, cell.frame.size.height);
+    cell.textLabel.textColor = [UIColor grayColor];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+    UILabel *timeValue = [[UILabel alloc] initWithFrame:CGRectMake(230, 0, 80, cell.frame.size.height)];
+    timeValue.text = rowData[@"time"];
+    timeValue.font = [UIFont systemFontOfSize:13];
+    timeValue.textColor = [UIColor grayColor];
+    [cell addSubview:timeValue];
     
     // Configure the cell...
     
     return cell;
 }
 
-
- - (CGFloat)tableView:(UITableView *)tableView
-heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    Cells * cell = (Cells *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.timeValue.frame.origin.y + cell.timeValue.frame.size.height;
+-(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.1;
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIViewController * viewController = [[GuideDetailViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+/*
+// Override to support conditionalediting of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
+
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+*/
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

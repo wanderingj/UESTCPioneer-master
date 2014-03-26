@@ -40,7 +40,6 @@ static  NSString *CellTableIdentifier = @"CellTableIdentifier";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: CellTableIdentifier];
    // [self.tableView setFrame:CGRectMake(0, 0, 320, 300)];
     
-    NSLog(@"aaaaaaaaaaaaa%f",self.tableView.frame.origin.y);
     self.title = @"组织架构";
     self.tableView.separatorInset = UIEdgeInsetsZero;
 
@@ -79,8 +78,12 @@ static  NSString *CellTableIdentifier = @"CellTableIdentifier";
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier];
     }
     NSDictionary * rowData = self.data[indexPath.row];
-    UIImage * image =[helper getCustomImage:[UIImage imageNamed:rowData[@"image"]] insets:UIEdgeInsetsMake(20, 0, 45, 45)];
-    cell.imageView.image = image;
+    UIImage * image =[helper getCustomImage:[UIImage imageNamed:rowData[@"image"]] insets:UIEdgeInsetsMake(23, 0, 47, 25)];
+    UIImageView * imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.frame = CGRectMake(10, 0, 30, cell.frame.size.height);
+    [cell.contentView addSubview:imageView];
+    cell.indentationLevel = 2;
+    cell.indentationWidth = 20.0f;
     cell.textLabel.text = rowData[@"title"];
     
     // Configure the cell...
