@@ -8,6 +8,7 @@
 
 #import "OrganTableViewController.h"
 #import "helper.h"
+#import "OrganDetailTableViewController.h"
 
 @interface OrganTableViewController ()
 @property(nonatomic,strong) NSArray * data;
@@ -93,6 +94,12 @@ static  NSString *CellTableIdentifier = @"CellTableIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.1;
+}
+
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIViewController * viewController = [[OrganDetailTableViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 /*

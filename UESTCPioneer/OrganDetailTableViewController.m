@@ -1,25 +1,27 @@
 //
-//  GuideTableViewController.m
+//  OrganDetailTableViewController.m
 //  UESTCPioneer
 //
-//  Created by 马君 on 14-3-22.
+//  Created by 马君 on 14-3-26.
 //  Copyright (c) 2014年 Sway. All rights reserved.
 //
 
-#import "GuideTableViewController.h"
-#import "GuideDetailViewController.h"
+#import "OrganDetailTableViewController.h"
 
-@interface GuideTableViewController ()
-
-@property (nonatomic,strong) NSArray * data;
+@interface OrganDetailTableViewController ()
 
 @end
 
-@implementation GuideTableViewController
+@implementation OrganDetailTableViewController
 
+static NSString * CellIdentifier = @"cellIdentifier";
 
-static  NSString *CellTableIdentifier = @"CellTableIdentifier";
-
+- (NSArray *) data{
+    if (!_data) {
+        _data = @[@"001 通信与信息工程学院党委",@"002 电子工程学院党委",@"003 微电子与固体电子学院党委",@"004 物理电子学院党委",@"005 光电信息学院党委"];
+    }
+    return _data;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,20 +32,12 @@ static  NSString *CellTableIdentifier = @"CellTableIdentifier";
     return self;
 }
 
-
--(NSArray *)data{
-    if (!_data) {
-        _data = @[@{@"title":@"111",@"time":@"2014-03-22"},@{@"title":@"申请22",@"time":@"2014-03-22"},@{@"title":@"333",@"time":@"2014-03-22"}];
-    }
-    return _data;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellTableIdentifier];
+    self.title = @"各单位党委";
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    self.title = @"办事指南";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -74,37 +68,19 @@ static  NSString *CellTableIdentifier = @"CellTableIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    NSDictionary * rowData = self.data[indexPath.row];
-    cell.textLabel.text = rowData[@"title"];
-    cell.textLabel.frame = CGRectMake(0, 0, 200, cell.frame.size.height);
-    cell.textLabel.textColor = [UIColor grayColor];
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
-    UILabel *timeValue = [[UILabel alloc] initWithFrame:CGRectMake(230, 0, 80, cell.frame.size.height)];
-    timeValue.text = rowData[@"time"];
-    timeValue.font = [UIFont systemFontOfSize:13];
-    timeValue.textColor = [UIColor grayColor];
-    [cell addSubview:timeValue];
-    
+    cell.textLabel.text = self.data[indexPath.row];
     // Configure the cell...
     
     return cell;
 }
 
--(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.1;
-}
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UIViewController * viewController = [[GuideDetailViewController alloc] initWithTitle:@"详情"];
-    [self.navigationController pushViewController:viewController animated:YES];
-}
 
 /*
-// Override to support conditionalediting of the table view.
+// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
