@@ -49,12 +49,22 @@
     _stateLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, _adressLabel.frame.origin.y + _adressLabel.frame.size.height + 10, 130, 50)];
     _stateLabel.text = @"文件下载状态 :";
     
+    
+    _downloadButton = [[UIButton alloc] initWithFrame:CGRectMake(100, _stateLabel.frame.origin.y + _stateLabel.frame.size.height + 20.0, 100.0, 30.0)];
+    [_downloadButton setBackgroundImage:[UIImage imageNamed:@"filedl"] forState:UIControlStateNormal];
+    [_downloadButton setBackgroundImage:[UIImage imageNamed:@"filedl"] forState:UIControlStateHighlighted];
+    [_downloadButton setBackgroundImage:[UIImage imageNamed:@"filedl"] forState:UIControlStateSelected];
+    _downloadButton.titleLabel.text = @"下载文件";
+    _downloadButton.titleLabel.textColor = [UIColor whiteColor];
+    
+    
     for (int i = 0; i < 3; i ++) {
         UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 60+60*i, 320, 1)];
         bgView.backgroundColor = [UIColor redColor];
         [self.view addSubview:bgView];
     }
     
+    [self.view addSubview:_downloadButton];
     [self.view addSubview:_nameLabel];
     [self.view addSubview:_adressLabel];
     [self.view addSubview:_stateLabel];

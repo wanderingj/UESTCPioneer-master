@@ -128,6 +128,7 @@
 		F2A27A1618E2ACE300031656 /* TheoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A27A1518E2ACE300031656 /* TheoryDetailViewController.m */; };
 		F2A27A1F18E2B53300031656 /* OrganDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A27A1E18E2B53300031656 /* OrganDetailTableViewController.m */; };
 		F2A27A2218E2B88E00031656 /* LearnDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A27A2118E2B88E00031656 /* LearnDetailViewController.m */; };
+		F2ABFEB918E2F0EE00AE6371 /* filedl.png in Resources */ = {isa = PBXBuildFile; fileRef = F2ABFEB818E2F0EE00AE6371 /* filedl.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -305,6 +306,7 @@
 		F2A27A1E18E2B53300031656 /* OrganDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganDetailTableViewController.m; sourceTree = "<group>"; };
 		F2A27A2018E2B88E00031656 /* LearnDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnDetailViewController.h; sourceTree = "<group>"; };
 		F2A27A2118E2B88E00031656 /* LearnDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnDetailViewController.m; sourceTree = "<group>"; };
+		F2ABFEB818E2F0EE00AE6371 /* filedl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filedl.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +377,7 @@
 		8834BA0A18D6EF980023BA87 /* partydata */ = {
 			isa = PBXGroup;
 			children = (
+				F2ABFEB818E2F0EE00AE6371 /* filedl.png */,
 				F2A27A1218E29EBA00031656 /* sepline.png */,
 				F218F5F318DD5FB5000C0A3B /* download.png */,
 				F218F5F418DD5FB5000C0A3B /* dxfile.png */,
@@ -819,6 +822,7 @@
 				F243536A18DAF7D1001C8C8F /* 01.png in Resources */,
 				D24336F618D2CA1400845121 /* dig.png in Resources */,
 				8834B9FF18D6EDBC0023BA87 /* care.png in Resources */,
+				F2ABFEB918E2F0EE00AE6371 /* filedl.png in Resources */,
 				DCB5136F18C6C43700B7EE95 /* Main.storyboard in Resources */,
 				D24336FD18D2CA1400845121 /* plus_gray.png in Resources */,
 				517485BE18CA056F00413228 /* act2.png in Resources */,
